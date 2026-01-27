@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+
 import Link from "next/link";
 import {
   Home,
@@ -16,30 +17,35 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { label: "Home", to: "/", icon: Home },
-  { label: "Work", to: "#work", icon: BriefcaseBusiness },
-  { label: "Tools", to: "#tools", icon: Cuboid },
-  { label: "Case Study", to: "#caseStudy", icon: Microscope },
+  { label: "Home", to: "home", icon: Home },
+  { label: "Work", to: "work", icon: BriefcaseBusiness },
+  { label: "Tools", to: "tools", icon: Cuboid },
+  { label: "Case Study", to: "case-study", icon: Microscope },
 ];
 
-const Navbar: React.FC = () => {
+export default function Navbar({ activeSection }: { activeSection: string }) {
   return (
-    <div className="flex justify-center p-4">
-      <nav className="flex gap-4 px-5 py-4 border rounded-full items-center justify-center">
-        {navItems.map((item) => (
-          <Link
-            key={item.to}
-            href={item.to}
-            className="flex items-center gap-2 hover:text-blue-500 transition-colors"
-          >
-            <item.icon size={18} strokeWidth={2} />
-            <span>{item.label}</span>
-          </Link>
-        ))}
-        <Button className="rounded-full">Get in touch</Button>
+    <div className="fixed top-4 w-full flex justify-center z-50">
+      <nav className="flex gap-4 px-5 py-3 border rounded-full items-center bg-white/80 backdrop-blur-md shadow-sm">
+        {navItems.map((item) => {
+          const isActive = activeSection === item.to;
+          return (
+            <Link
+              key={item.to}
+              href={`#${item.to}`}
+              className={`flex items-center gap-2 px-3 py-1 rounded-full transition-all ${
+                isActive
+                  ? "bg-blue-100 text-blue-600 font-medium"
+                  : "text-gray-600 hover:text-blue-500"
+              }`}
+            >
+              <item.icon size={18} />
+              <span className="hidden md:inline">{item.label}</span>
+            </Link>
+          );
+        })}
+        <Button className="rounded-full ml-2">Contact</Button>
       </nav>
     </div>
   );
-};
-
-export default Navbar;
+}
