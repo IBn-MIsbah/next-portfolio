@@ -13,7 +13,8 @@
     "db:studio": "prisma studio",
     "db:format": "prisma format",
     "db:seed": "tsx prisma/seed.ts",
-    "vercel-build": "prisma generate && pnpm build"
+    "vercel-build": "prisma generate && pnpm build",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.3.0",
