@@ -4,7 +4,9 @@ import {
   Linkedin,
   MousePointer2,
   ArrowDown,
+  Send,
 } from "lucide-react";
+import Link from "next/link";
 
 const HeroSection = ({
   innerRef,
@@ -51,24 +53,35 @@ const HeroSection = ({
             seamless user experiences.
           </p>
 
-          <div className="flex items-center gap-6 pt-4">
-            <button className="px-10 py-5 bg-white text-black font-bold rounded-sm hover:bg-blue-600 hover:text-white transition-all duration-300">
-              EXPLORE MY STACK
-            </button>
-            <div className="flex gap-4 text-gray-500">
+          <div className="flex gap-4 text-gray-500">
+            <Link href={"https://github.com/ibn-misbah"}>
               <Github
                 className="hover:text-white cursor-pointer transition-colors"
                 size={20}
               />
+            </Link>
+            <Link href={"https://x.com/Ibn_Misbah"}>
               <Twitter
                 className="hover:text-white cursor-pointer transition-colors"
                 size={20}
               />
+            </Link>
+            <Link
+              href={
+                "https://www.linkedin.com/in/kawnullah-misbahudin-32711a338/"
+              }
+            >
               <Linkedin
                 className="hover:text-white cursor-pointer transition-colors"
                 size={20}
               />
-            </div>
+            </Link>
+            <Link href={"https://t.me/IBn_Misbaah"}>
+              <Send
+                className="hover:text-white cursor-pointer transition-colors"
+                size={20}
+              />
+            </Link>
           </div>
         </div>
 
