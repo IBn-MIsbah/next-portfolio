@@ -23,29 +23,42 @@ const navItems: NavItem[] = [
   { label: "Case Study", to: "case-study", icon: Microscope },
 ];
 
-export default function Navbar({ activeSection }: { activeSection: string }) {
+const Navbar = ({ activeSection }: { activeSection: string }) => {
   return (
-    <div className="fixed top-4 w-full flex justify-center z-50">
-      <nav className="flex gap-4 px-5 py-3 border rounded-full items-center bg-white/80 backdrop-blur-md shadow-sm">
+    <div className="fixed top-6 w-full flex justify-center z-50 px-4 pointer-events-none">
+      <nav
+        aria-label="Main navigation"
+        className="flex gap-2 md:gap-4 px-4 py-2 border border-white/10 rounded-full items-center justify-center bg-black/40 backdrop-blur-xl shadow-2xl pointer-events-auto"
+      >
         {navItems.map((item) => {
           const isActive = activeSection === item.to;
+
           return (
             <Link
               key={item.to}
               href={`#${item.to}`}
-              className={`flex items-center gap-2 px-3 py-1 rounded-full transition-all ${
+              className={`flex items-center gap-2 px-3 py-2 rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 ring-blue-500 ${
                 isActive
-                  ? "bg-blue-100 text-blue-600 font-medium"
-                  : "text-gray-600 hover:text-blue-500"
+                  ? "text-white bg-white/10"
+                  : "text-gray-400 hover:text-white hover:bg-white/5"
               }`}
             >
-              <item.icon size={18} />
-              <span className="hidden md:inline">{item.label}</span>
+              <item.icon size={18} strokeWidth={isActive ? 2.5 : 2} />
+              <span className="hidden md:inline text-sm font-medium">
+                {item.label}
+              </span>
             </Link>
           );
         })}
-        <Button className="rounded-full ml-2">Contact</Button>
+
+        <div className="h-6 w-px bg-white/10 mx-2 hidden md:block" />
+
+        <Button className="rounded-full text-white bg-blue-600 hover:bg-blue-500 transition-colors px-6 h-9 text-sm font-bold flex items-center justify-center">
+          Contact
+        </Button>
       </nav>
     </div>
   );
-}
+};
+
+export default Navbar;
