@@ -75,3 +75,29 @@ model Verification {
   @@index([identifier])
   @@map("verification")
 }
+
+model Project {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique // Important for clean URLs like /work/my-cool-project
+  description String   @db.Text // Use @db.Text for long descriptions
+  content     String?  @db.Text // This would be your full Case Study (Markdown or HTML)
+  imageUrl    String // Main thumbnail
+  published   Boolean  @default(false) // Toggle visibility from your dashboard
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("projects")
+}
+
+model Work {
+  id          String    @id @default(cuid())
+  orgName     String
+  role        String
+  startDate   DateTime
+  endDate     DateTime?
+  description String    @db.Text
+  location    String?
+
+  @@map("work_experience")
+}
