@@ -4,13 +4,19 @@ import { useState } from "react";
 import { useInView } from "react-intersection-observer";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/Hero";
+import Link from "next/link";
+import { Github, Twitter, Linkedin, Send } from "lucide-react";
+import ContactSection from "@/components/Contact";
+import ToolsSection from "@/components/Tools";
+import WorkSection from "@/components/Work";
+import CaseStudySection from "@/components/CaseStudy";
 
 export default function PortfolioPage() {
   const [activeSection, setActiveSection] = useState("home");
 
   // Helper function to create the observer config
   const createEntry = (id: string) => ({
-    threshold: 0.2,
+    threshold: 0.3,
     onChange: (inView: boolean) => {
       if (inView) setActiveSection(id);
     },
@@ -20,6 +26,10 @@ export default function PortfolioPage() {
   const { ref: workRef } = useInView(createEntry("work"));
   const { ref: toolsRef } = useInView(createEntry("tools"));
   const { ref: caseStudyRef } = useInView(createEntry("case-study"));
+  const { ref: contactRef } = useInView(createEntry("contact"));
+
+  const date = new Date();
+  const year = date.getFullYear();
 
   return (
     <div className="bg-[#0a0a0a] min-h-screen font-sans selection:bg-blue-500 selection:text-white">
@@ -28,49 +38,50 @@ export default function PortfolioPage() {
       <main>
         <HeroSection innerRef={homeRef} />
 
-        {/* Work Section Placeholder */}
-        <section
-          ref={workRef}
-          id="work"
-          className="min-h-screen w-full flex items-center justify-center border-t border-white/5 bg-[#0a0a0a]"
-        >
-          <div className="text-center">
-            <h2 className="text-5xl font-bold text-white mb-4">
-              Selected Work
-            </h2>
-            <p className="text-gray-500">
-              Showcasing digital products and experiments.
-            </p>
-          </div>
-        </section>
+        <WorkSection innerRef={workRef} />
 
-        {/* Tools Section Placeholder */}
-        <section
-          ref={toolsRef}
-          id="tools"
-          className="min-h-screen w-full flex items-center justify-center border-t border-white/5 bg-[#0d0d0d]"
-        >
-          <div className="text-center">
-            <h2 className="text-5xl font-bold text-white mb-4">Tech Stack</h2>
-            <p className="text-gray-500">
-              The tools I use to bring ideas to life.
-            </p>
-          </div>
-        </section>
+        <ToolsSection innerRef={toolsRef} />
 
-        {/* Case Study Section Placeholder */}
-        <section
-          ref={caseStudyRef}
-          id="case-study"
-          className="min-h-screen w-full flex items-center justify-center border-t border-white/5 bg-[#0a0a0a]"
-        >
-          <div className="text-center">
-            <h2 className="text-5xl font-bold text-white mb-4">Deep Dives</h2>
-            <p className="text-gray-500">
-              Case studies of complex engineering challenges.
-            </p>
+        <CaseStudySection innerRef={caseStudyRef} />
+
+        <ContactSection innerRef={contactRef} />
+
+        <footer className="py-20 border-t border-white/5 bg-[#0a0a0a] text-center">
+          <div className="flex justify-center gap-4 mb-6">
+            <Link href={"https://github.com/ibn-misbah"}>
+              <Github
+                className="text-gray-600 hover:text-white cursor-pointer"
+                size={20}
+              />
+            </Link>
+            <Link href={"https://x.com/Ibn_Misbah"}>
+              <Twitter
+                className="text-gray-600 hover:text-white cursor-pointer"
+                size={20}
+              />
+            </Link>
+            <Link
+              href={
+                "https://www.linkedin.com/in/kawnullah-misbahudin-32711a338/"
+              }
+            >
+              <Linkedin
+                className="text-gray-600 hover:text-white cursor-pointer"
+                size={20}
+              />
+            </Link>
+            <Link href={"https://t.me/IBn_Misbaah"}>
+              <Send
+                className="text-gray-600 hover:text-white cursor-pointer"
+                size={20}
+              />
+            </Link>
           </div>
-        </section>
+          <p className="text-gray-600 text-sm font-mono tracking-tighter">
+            &copy; {year} KAWNULLAH MISBAHUDIN —{" "}
+            <span className="text-blue-500">IBN_MISBAH</span>
+          </p>
+        </footer>
       </main>
 
       {/* Global CSS for Smooth Scrolling */}
@@ -79,6 +90,8 @@ export default function PortfolioPage() {
           __html: `
         html { scroll-behavior: smooth; }
         body { background-color: #0a0a0a; margin: 0; }
+        @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+        .animate-fade-in { animation: fade-in 1s ease-out forwards; }
       `,
         }}
       />
