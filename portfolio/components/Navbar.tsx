@@ -7,8 +7,8 @@ import {
   Cuboid,
   Microscope,
   LucideIcon,
+  Mail,
 } from "lucide-react";
-import { Button } from "./ui/button";
 
 interface NavItem {
   label: string;
@@ -21,6 +21,7 @@ const navItems: NavItem[] = [
   { label: "Work", to: "work", icon: BriefcaseBusiness },
   { label: "Tools", to: "tools", icon: Cuboid },
   { label: "Case Study", to: "case-study", icon: Microscope },
+  { label: "Contact", to: "contact", icon: Mail },
 ];
 
 const Navbar = ({ activeSection }: { activeSection: string }) => {
@@ -50,12 +51,6 @@ const Navbar = ({ activeSection }: { activeSection: string }) => {
             </Link>
           );
         })}
-
-        <div className="h-6 w-px bg-white/10 mx-2 hidden md:block" />
-
-        <Button className="rounded-full text-white bg-blue-600 hover:bg-blue-500 transition-colors px-6 h-9 text-sm font-bold flex items-center justify-center">
-          Contact
-        </Button>
       </nav>
     </div>
   );
