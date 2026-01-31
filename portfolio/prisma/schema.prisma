@@ -81,6 +81,9 @@ model Project {
   title       String
   slug        String   @unique // Important for clean URLs like /work/my-cool-project
   description String   @db.Text // Use @db.Text for long descriptions
+  techStack   String[]
+  githubUrl   String?
+  liveUrl     String?
   content     String?  @db.Text // This would be your full Case Study (Markdown or HTML)
   imageUrl    String // Main thumbnail
   published   Boolean  @default(false) // Toggle visibility from your dashboard
